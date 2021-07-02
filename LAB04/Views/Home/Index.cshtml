@@ -1,0 +1,17 @@
+﻿@model IEnumerable<LAB04.Models.Course>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+
+<div class="row">
+    
+    <ul>
+        @foreach (var item in Model)
+        {
+            <li>
+                @item.DateTime.ToString("dd//MM/yyyy HH:mm")- @item.Name - @item.Category.Name
+            </li>
+        }
+    </ul>
+</div>
