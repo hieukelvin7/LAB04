@@ -65,27 +65,27 @@ namespace LAB04.Controllers
             }
             return View(courses);
         }
-      
+        [HttpGet]
         public ActionResult Edit(int id)
         {
-          
-            Course ed = context.Courses.SingleOrDefault(p => p.Id == id);
-           
-            return View(ed);
+
+            Course c = context.Courses.SingleOrDefault(p => p.Id == id);
+            c.ListCategory = context.Categories.ToList();
+            return View(c);
         }
         [Authorize]
         [HttpPost]
-        public ActionResult Edit(int id, Course b)
+        public ActionResult Edit(Course c)
         {
 
-            Course edit = context.Courses.SingleOrDefault(p => p.Id == id);
+            Course edit = context.Courses.SingleOrDefault(p => p.Id == c.Id);
             if (edit != null)
             {
-                context.Courses.AddOrUpdate(b);
+                context.Courses.AddOrUpdate(c);
                 context.SaveChanges();
-                return RedirectToAction("Mine");
+                
             }
-            return this.Edit(id);
+            return RedirectToAction("Mine");
         }
         [Authorize]
         public ActionResult Delete(int id)
