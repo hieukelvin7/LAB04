@@ -106,3 +106,9 @@ D:\LAB04\LAB04\obj\Debug\LAB04.csproj.CoreCompileInputs.cache
 D:\LAB04\LAB04\obj\Debug\LAB04.csproj.CopyComplete
 D:\LAB04\LAB04\obj\Debug\LAB04.dll
 D:\LAB04\LAB04\obj\Debug\LAB04.pdb
+D:\LAB04\LAB04\bin\System.Net.Http.Formatting.dll
+D:\LAB04\LAB04\bin\System.Web.Http.dll
+D:\LAB04\LAB04\bin\System.Web.Http.WebHost.dll
+D:\LAB04\LAB04\bin\System.Net.Http.Formatting.xml
+D:\LAB04\LAB04\bin\System.Web.Http.xml
+D:\LAB04\LAB04\bin\System.Web.Http.WebHost.xml
