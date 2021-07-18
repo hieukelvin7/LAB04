@@ -15,10 +15,21 @@ namespace LAB04.Controllers
         {
             BigSchoolContext context = new BigSchoolContext();
             var upcommingCourse = context.Courses.Where(p => p.DateTime > DateTime.Now).OrderBy(p => p.DateTime).ToList();
+            var userID = User.Identity.GetUserId();
             foreach (Course i in upcommingCourse)
             {
                 ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(i.LecturerId);
                 i.Name = user.Name;
+                if (userID != null)
+                {
+                    i.isLogin = true;
+                    Attendence find = context.Attendences.FirstOrDefault(p => p.CourseId == i.Id && p.Attendence1 == userID);
+                    if (find == null)                   
+                        i.isShowGoing = true;
+                    Following findFollow = context.Followings.FirstOrDefault(p => p.FollowerId == userID && p.FolloweeId == i.LecturerId);
+                    if (findFollow == null)
+                        i.isShowFollow = true;
+                }
             }
             return View(upcommingCourse);
         }

@@ -107,7 +107,28 @@ namespace LAB04.Controllers
             }
             return RedirectToAction("Mine");
         }
-        
+        public ActionResult LectureIamGoing()
+        {
+            ApplicationUser currentUser = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>()
+                                           .FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
+            var listFollowee = context.Followings.Where(p => p.FollowerId == currentUser.Id).ToList();
+            var listAttendances = context.Attendences.Where(p => p.Attendence1 == currentUser.Id).ToList();
+            var courses = new List<Course>();
+            foreach (var course in listAttendances)
+            {
+                foreach (var item in listFollowee)
+                {
+                    if (item.FolloweeId == course.Course.LecturerId)
+                    {
+                        Course obj = course.Course;
+                        obj.LectureName = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>()
+                                   .FindById(obj.LecturerId).Name;
+                        courses.Add(obj);
+                    }
+                }
+            }
+            return View(courses);
+        }
        
     }
 }
